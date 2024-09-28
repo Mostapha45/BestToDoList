@@ -3,6 +3,7 @@
     "name": "BestToDoList",
     "slug": "BestToDoList",
     "version": "1.0.0",
+    "scheme": "BestToDoList",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,6 +23,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
