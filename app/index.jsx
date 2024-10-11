@@ -1,28 +1,25 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import ToDoList from "../components/ToDoList";
-import ToDoForm from "../components/ToDoForm";
+import ToDoList from "../components/ToDoList"; 
+import ToDoForm from "../components/ToDoForm"; 
 
-export default function App() {
+export default function Index() {
   const [tasks, setTasks] = useState([
     { id: 1, text: "Do laundry", completed: true },
     { id: 2, text: "Go to gym", completed: false },
     { id: 3, text: "Walk dog", completed: true },
   ]);
 
-  // Function to add a new task with a unique ID
   const addTask = (taskText) => {
     setTasks([...tasks, { id: Date.now(), text: taskText, completed: false }]);
   };
 
-  // Function to toggle task completion status
   const toggleCompleteTask = (taskId) => {
     setTasks(tasks.map(task =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     ));
   };
 
-  // Function to remove a task
   const removeTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
@@ -38,6 +35,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     paddingTop: 20,
     paddingHorizontal: 10,
   },
