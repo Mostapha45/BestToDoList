@@ -29,17 +29,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   completed: {
-    backgroundColor: "green",
+    backgroundColor: "#ABE08B",
   },
   outstanding: {
-    backgroundColor: "white",
+    backgroundColor: "#FFA8B5",
   },
   taskText: {
     fontSize: 16,
   },
   statusText: {
     fontSize: 12,
-    color: "#555",
+    color: "black",
   },
 });
 
