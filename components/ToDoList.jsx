@@ -1,15 +1,19 @@
 import React from "react";
 import { ScrollView, View, Text, Pressable, Button, StyleSheet } from "react-native";
 
-const ToDoList = ({ tasks, onToggleComplete, onRemoveTask }) => {
+function ToDoList({ tasks, onToggleComplete, onRemoveTask }) {
   return (
     <ScrollView>
       {tasks.map((task) => (
-        <View key={task.id} style={[styles.task, task.completed ? styles.completed : styles.outstanding]}>
+        <View
+          key={task.id}
+          style={[styles.task, task.completed ? styles.completed : styles.outstanding]} 
+        >
           <Pressable onPress={() => onToggleComplete(task.id)}>
             <View>
               <Text style={styles.taskText}>{task.text}</Text>
-              <Text style={styles.statusText}>{task.completed ? "Completed" : "Outstanding"}</Text>
+              <Text style={styles.statusText}>
+                {task.completed ? "Completed" : "Outstanding"}</Text> {/* Show status of task */}
             </View>
           </Pressable>
           <Button title="Remove" onPress={() => onRemoveTask(task.id)} />
@@ -17,7 +21,7 @@ const ToDoList = ({ tasks, onToggleComplete, onRemoveTask }) => {
       ))}
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   task: {
@@ -29,10 +33,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   completed: {
-    backgroundColor: "#ABE08B",
+    backgroundColor: "#ABE08B", // Green background for completed tasks
   },
   outstanding: {
-    backgroundColor: "#FFA8B5",
+    backgroundColor: "#FFA8B5", // Red for outstanding tasks
   },
   taskText: {
     fontSize: 16,

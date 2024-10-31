@@ -5,9 +5,9 @@ import ToDoForm from "../components/ToDoForm";
 
 export default function Index() {
   const [tasks, setTasks] = useState([
-    { id: 1, text: "Do laundry", completed: true },
+    { id: 1, text: "Do laundry", completed: false },
     { id: 2, text: "Go to gym", completed: false },
-    { id: 3, text: "Walk dog", completed: true },
+    { id: 3, text: "Walk dog", completed: false },
   ]);
 
   const addTask = (taskText) => {
