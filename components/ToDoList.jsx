@@ -12,11 +12,10 @@ function ToDoList({ tasks, onToggleComplete, onRemoveTask }) {
           <Pressable onPress={() => onToggleComplete(task.id)}>
             <View>
               <Text style={styles.taskText}>{task.text}</Text>
-              <Text style={styles.statusText}>
+             {/* <Text style={styles.statusText}>
                 {task.completed ? "Completed" : "Outstanding"}</Text> {/* Show status of task */}
             </View>
           </Pressable>
-          <Button title="Remove" onPress={() => onRemoveTask(task.id)} />
         </View>
       ))}
     </ScrollView>

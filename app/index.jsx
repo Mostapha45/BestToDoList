@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import ToDoList from "../components/ToDoList"; 
-import ToDoForm from "../components/ToDoForm"; 
+import ToDoList from "../components/ToDoList";
 
 export default function Index() {
   const [tasks, setTasks] = useState([
@@ -10,24 +9,15 @@ export default function Index() {
     { id: 3, text: "Walk dog", completed: false },
   ]);
 
-  const addTask = (taskText) => {
-    setTasks([...tasks, { id: Date.now(), text: taskText, completed: false }]);
-  };
-
   const toggleCompleteTask = (taskId) => {
     setTasks(tasks.map(task =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     ));
   };
 
-  const removeTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <ToDoList tasks={tasks} onToggleComplete={toggleCompleteTask} onRemoveTask={removeTask} />
-      <ToDoForm addTask={addTask} />
+      <ToDoList tasks={tasks} onToggleComplete={toggleCompleteTask} />
     </SafeAreaView>
   );
 }
