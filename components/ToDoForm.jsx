@@ -1,25 +1,51 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 
-const ToDoForm = ({ addTask }) => {
+const ToDoForm = ({ addTask, tasks }) => {
   const [newTask, setNewTask] = useState("");
+  const [error, setError] = useState(false);
 
   const handleAddTask = () => {
-    if (newTask.trim() !== "") {
-      addTask(newTask);
-      setNewTask(""); // Clear input field after adding task
+    if (newTask.trim() === "") {
+      setError(true);
+      return;
     }
+
+    // Debugging: Check tasks and new task
+    console.log("Tasks:", tasks);
+    console.log("New Task:", newTask);
+
+    // Check for duplicates
+    const isDuplicate = tasks.some(
+      (task) => task.text.toLowerCase() === newTask.trim().toLowerCase()
+    );
+
+    console.log("Is Duplicate:", isDuplicate); // Debugging
+
+    if (isDuplicate) {
+      Alert.alert("Duplicate Task", "This task already exists!");
+      return;
+    }
+
+    addTask(newTask.trim());
+    setNewTask("");
+    setError(false);
   };
 
   return (
     <View style={styles.form}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, error && styles.inputError]}
         placeholder="Add a new task..."
         value={newTask}
-        onChangeText={setNewTask}
+        onChangeText={(text) => {
+          setNewTask(text);
+          setError(false);
+        }}
       />
-      <Button title="Add" onPress={handleAddTask} />
+      <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
+        <Text style={styles.addButtonText}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -29,16 +55,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 20,
-    marginTop: 20,
+    margin: 20,
   },
   input: {
     flex: 1,
     borderWidth: 1,
     borderColor: "#ccc",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
     marginRight: 10,
+    backgroundColor: "#f9f9f9",
+  },
+  inputError: {
+    borderColor: "#ff6b6b",
+  },
+  addButton: {
+    backgroundColor: "#4CAF50",
+    borderRadius: 50,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  addButtonText: {
+    color: "#fff",
+    fontSize: 20,
   },
 });
 

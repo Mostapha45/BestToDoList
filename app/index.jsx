@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import ToDoList from "../components/ToDoList";
+import ToDoForm from "../components/ToDoForm"; 
+
 
 export default function Index() {
   const [tasks, setTasks] = useState([
@@ -15,9 +17,23 @@ export default function Index() {
     ));
   };
 
+  const addTask = (taskText) => {
+    setTasks([...tasks, { id: Date.now(), text: taskText, completed: false }]);
+  };
+
+
+
+  const removeTask = (taskId) => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  };
+
+
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <ToDoList tasks={tasks} onToggleComplete={toggleCompleteTask} />
+<ToDoList tasks={tasks} onToggleComplete={toggleCompleteTask} onRemoveTask={removeTask} />
+<ToDoForm addTask={addTask} tasks={tasks} />
     </SafeAreaView>
   );
 }
